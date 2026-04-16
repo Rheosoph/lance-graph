@@ -11,11 +11,11 @@ keywords = ["lance", "graph", "cypher", "query", "datafusion"]
 categories = ["database", "data-structures", "science"]
 
 [dependencies]
-arrow = { version = "56.2", features = ["prettyprint"] }
-arrow-array = "56.2"
-arrow-schema = "56.2"
+arrow = { version = "57.2", features = ["prettyprint"] }
+arrow-array = "57.2"
+arrow-schema = "57.2"
 async-trait = "0.1"
-datafusion = { version = "50.3", default-features = false, features = [
+datafusion = { version = "52.1", default-features = false, features = [
     "nested_expressions",
     "regex_expressions",
     "unicode_expressions",
@@ -25,29 +25,33 @@ datafusion = { version = "50.3", default-features = false, features = [
     "string_expressions",
     "parquet",
 ] }
-datafusion-common = "50.3"
-datafusion-expr = "50.3"
-datafusion-sql = "50.3"
-datafusion-functions-aggregate = "50.3"
+datafusion-common = "52.1"
+datafusion-expr = "52.1"
+datafusion-sql = "52.1"
+datafusion-functions-aggregate = "52.1"
+datafusion-federation = { version = "0.4", optional = true }
+datafusion-table-providers = { git = "https://github.com/TM9657/datafusion-table-providers", rev = "86f070ef199217711042d08f29adbbb4e1cd14a6", default-features = false, features = ["duckdb-federation"], optional = true }
 futures = "0.3"
 lance-graph-catalog = { path = "../lance-graph-catalog", version = "0.5.4" }
-lance = "1.0.0"
-lance-linalg = "1.0.0"
-lance-namespace = "1.0.1"
+lance = "4.0.0"
+lance-linalg = "4.0.0"
+lance-namespace = "4.0.0"
 nom = "7.1"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 snafu = "0.8"
-deltalake = { version = "0.29", features = ["datafusion", "s3", "azure", "gcs"], optional = true }
+deltalake = { version = "0.31.1", features = ["datafusion", "s3", "azure", "gcs"], optional = true }
 url = { version = "2", optional = true }
 
 [features]
-default = ["unity-catalog", "delta"]
+default = ["unity-catalog", "delta", "duckdb-table-provider"]
 unity-catalog = ["lance-graph-catalog/unity-catalog"]
 delta = ["dep:deltalake", "dep:url"]
+duckdb-table-provider = ["dep:datafusion-federation", "dep:datafusion-table-providers", "dep:url"]
 
 [dev-dependencies]
 futures = "0.3"
-lance-arrow = "1.0.0"
+lance-arrow = "4.0.0"
+parquet = "57.2"
 tempfile = "3"
 tokio = { version = "1.37", features = ["macros", "rt-multi-thread"] }

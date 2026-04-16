@@ -55,3 +55,7 @@ Thumbs.db
 
 # Generated data
 knowledge_graph_data/
+
+
+#Ignore vscode AI rules
+.github/instructions/codacy.instructions.md

@@ -35,7 +35,11 @@ pub async fn build_context_from_connector(
     catalog_name: &str,
     schema_name: &str,
 ) -> Result<SessionContext> {
+    #[cfg(feature = "duckdb-table-provider")]
+    let ctx = SessionContext::new_with_state(datafusion_federation::default_session_state());
+    #[cfg(not(feature = "duckdb-table-provider"))]
     let ctx = SessionContext::new();
+
     connector
         .register_schema(&ctx, catalog_name, schema_name)
         .await

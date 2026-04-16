@@ -3,7 +3,6 @@
 use async_trait::async_trait;
 use lance_namespace::models::{DescribeTableRequest, DescribeTableResponse};
 use lance_namespace::{Error as NamespaceError, LanceNamespace, Result};
-use snafu::location;
 
 /// A namespace that resolves table names relative to a base directory or URI.
 #[derive(Debug, Clone)]
@@ -37,10 +36,7 @@ impl LanceNamespace for DirNamespace {
 
     async fn describe_table(&self, request: DescribeTableRequest) -> Result<DescribeTableResponse> {
         let id = request.id.ok_or_else(|| {
-            NamespaceError::invalid_input(
-                "DirNamespace requires the table identifier to be provided",
-                location!(),
-            )
+            NamespaceError::invalid_input("DirNamespace requires the table identifier to be provided")
         })?;
 
         if id.len() != 1 {
@@ -49,7 +45,6 @@ impl LanceNamespace for DirNamespace {
                     "DirNamespace expects identifiers with a single component, got {:?}",
                     id
                 ),
-                location!(),
             ));
         }
 
