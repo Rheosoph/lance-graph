@@ -10,7 +10,7 @@ mod namespace;
 pub(crate) static RT: LazyLock<executor::BackgroundExecutor> =
     LazyLock::new(executor::BackgroundExecutor::new);
 
-#[pymodule]
+#[pymodule(gil_used = true)]
 fn _internal(py: Python, m: &Bound<'_, PyModule>) -> PyResult<()> {
     graph::register_graph_module(py, m)?;
     m.add("__version__", env!("CARGO_PKG_VERSION"))?;

@@ -11,11 +11,11 @@ keywords = ["lance", "graph", "cypher", "query", "datafusion"]
 categories = ["database", "data-structures", "science"]
 
 [dependencies]
-arrow = { version = "57.2", features = ["prettyprint"] }
-arrow-array = "57.2"
-arrow-schema = "57.2"
+arrow = { version = "58.4", features = ["prettyprint"] }
+arrow-array = "58.4"
+arrow-schema = "58.4"
 async-trait = "0.1"
-datafusion = { version = "52.1", default-features = false, features = [
+datafusion = { version = "53.1", default-features = false, features = [
     "nested_expressions",
     "regex_expressions",
     "unicode_expressions",
@@ -25,22 +25,22 @@ datafusion = { version = "52.1", default-features = false, features = [
     "string_expressions",
     "parquet",
 ] }
-datafusion-common = "52.1"
-datafusion-expr = "52.1"
-datafusion-sql = "52.1"
-datafusion-functions-aggregate = "52.1"
-datafusion-federation = { version = "0.4", optional = true }
-datafusion-table-providers = { git = "https://github.com/TM9657/datafusion-table-providers", rev = "86f070ef199217711042d08f29adbbb4e1cd14a6", default-features = false, features = ["duckdb-federation"], optional = true }
+datafusion-common = "53.1"
+datafusion-expr = "53.1"
+datafusion-sql = "53.1"
+datafusion-functions-aggregate = "53.1"
+datafusion-federation = { version = "=0.5.3", optional = true }
+datafusion-table-providers = { git = "https://github.com/Rheosoph/datafusion-table-providers.git", rev = "5945dfd349bbafdf92612f7824a02e6bb2018368", default-features = false, features = ["duckdb-federation"], optional = true }
 futures = "0.3"
 lance-graph-catalog = { path = "../lance-graph-catalog", version = "0.5.4" }
-lance = "4.0.0"
-lance-linalg = "4.0.0"
-lance-namespace = "4.0.0"
+lance = "=8.0.0"
+lance-linalg = "=8.0.0"
+lance-namespace = "=8.0.0"
 nom = "7.1"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 snafu = "0.8"
-deltalake = { version = "0.31.1", features = ["datafusion", "s3", "azure", "gcs"], optional = true }
+deltalake = { version = "0.32.4", features = ["datafusion", "s3", "azure", "gcs"], optional = true }
 url = { version = "2", optional = true }
 
 [features]
@@ -51,7 +51,7 @@ duckdb-table-provider = ["dep:datafusion-federation", "dep:datafusion-table-prov
 
 [dev-dependencies]
 futures = "0.3"
-lance-arrow = "4.0.0"
-parquet = "57.2"
+lance-arrow = "=8.0.0"
+parquet = "58.4"
 tempfile = "3"
 tokio = { version = "1.37", features = ["macros", "rt-multi-thread"] }
